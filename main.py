@@ -60,7 +60,11 @@ class Game:
             for block in self.blocks:
                 block.update()
 
-            self.ball.check_collision(self.player, self.blocks, self.win_t, self.win_r, self.win_b, self.win_l)
+            if self.ball.check_collision(self.player, self.blocks, self.win_t, self.win_r, self.win_b, self.win_l) or \
+                    key[K_r] or len(self.blocks) == 0:
+                pg.quit()
+                new_g = Game()
+                new_g.run()
 
             pg.display.flip()
             self.fpsClock.tick(self.fps)

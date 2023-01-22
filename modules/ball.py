@@ -29,6 +29,8 @@ class Ball:
             self.vel_y *= -1
         elif win_r.colliderect(self.rect) or win_l.colliderect(self.rect):
             self.vel_x *= -1
+        elif win_b.colliderect(self.rect):
+            return True
 
     def update(self):
         self.x += self.vel_x
