@@ -53,7 +53,7 @@ class Game:
                     sys.exit()
 
             key = pg.key.get_pressed()
-            self.player.move(key)
+            self.player.move(key, self.win_r, self.win_l)
 
             self.player.update()
             self.ball.update()
