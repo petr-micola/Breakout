@@ -10,8 +10,6 @@ class Block:
         self.h = h
         self.x = x - self.w / 2
         self.y = y - y / 1.1 - self.h * 2
-        # self.vel = 10
-        # self.speed = 0
 
     def update(self):
         self.rect = pg.Rect((self.x, self.y), (self.w, self.h))

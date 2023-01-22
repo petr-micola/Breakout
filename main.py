@@ -7,10 +7,8 @@ from modules.player import Player
 from modules.ball import Ball
 from modules.block import Block
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
+WHITE = '#edf6f9'
+BLUE = '#83c5be'
 
 
 class Game:
@@ -26,16 +24,18 @@ class Game:
         self.win_b = pg.Rect((0, self.height), (self.width, self.height))
         self.win_l = pg.Rect((-self.width, 0), (self.width, self.height))
         self.screen = pg.display.set_mode((self.width, self.height))
-        pg.display.set_caption('Pygame hra')
-        # pg.display.set_icon()
-        # self.image = pg.image.load('image.jpg')
+        self.image = pg.image.load('assets/image.jpg')
+        self.icon = pg.image.load('assets/icon.png')
 
-        self.player = Player(self.screen, RED, 80, 8, self.width, self.height)
-        self.ball = Ball(self.screen, WHITE, 8, self.width, self.height)
+        pg.display.set_caption('Breakout')
+        pg.display.set_icon(self.icon)
+
+        self.player = Player(self.screen, WHITE, 80, 8, self.width, self.height)
+        self.ball = Ball(self.screen, BLUE, 8, self.width, self.height)
         self.blocks = []
         self.block_x = 80
-        for i in range(1, 28):
-            self.block = Block(self.screen, GREEN, 40, 6, self.block_x, self.height)
+        for i in range(1, 37):
+            self.block = Block(self.screen, WHITE, 40, 6, self.block_x, self.height)
             self.blocks.append(self.block)
             self.block_x += 60
             if i % 9 == 0:
@@ -44,8 +44,7 @@ class Game:
 
     def run(self):
         while True:
-            # self.screen.blit(self.image, (0, 0))
-            self.screen.fill(BLACK)
+            self.screen.blit(self.image, (0, 0))
 
             for event in pg.event.get():
                 if event.type == QUIT:
@@ -60,8 +59,11 @@ class Game:
             for block in self.blocks:
                 block.update()
 
+            if len(self.blocks) == 0:
+                self.screen.blit(pg.image.load('assets/winner.jpg'), (0, 0))
+
             if self.ball.check_collision(self.player, self.blocks, self.win_t, self.win_r, self.win_b, self.win_l) or \
-                    key[K_r] or len(self.blocks) == 0:
+                    key[K_r]:
                 pg.quit()
                 new_g = Game()
                 new_g.run()
