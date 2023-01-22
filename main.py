@@ -28,7 +28,7 @@ class Game:
         self.screen = pg.display.set_mode((self.width, self.height))
         pg.display.set_caption('Pygame hra')
         # pg.display.set_icon()
-        self.image = pg.image.load('image.jpg')
+        # self.image = pg.image.load('image.jpg')
 
         self.player = Player(self.screen, RED, 80, 8, self.width, self.height)
         self.ball = Ball(self.screen, WHITE, 8, self.width, self.height)
