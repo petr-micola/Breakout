@@ -2,6 +2,7 @@ import pygame as pg
 
 
 class Player:
+    # vytvoření hráče za pomocí parametrů
     def __init__(self, screen, color, w, h, x, y):
         self.rect = None
         self.screen = screen
@@ -13,10 +14,12 @@ class Player:
         self.vel = 10
         self.speed = 0
 
+    # detekce kolize s okrajem obrazovky
     def check_collision(self, win):
         if win.colliderect(self.rect):
             return True
 
+    # pohyb hráče pomocí kláves AD nebo šipek
     def move(self, key, win_r, win_l):
         if (key[pg.K_d] or key[pg.K_RIGHT]) and not self.check_collision(win_r):
             self.x += self.vel
@@ -25,6 +28,7 @@ class Player:
             self.x -= self.vel
             self.speed = -1
 
+    # znovuvykreslení objektu
     def update(self):
         self.rect = pg.Rect((self.x, self.y), (self.w, self.h))
         pg.draw.rect(self.screen, self.color, self.rect)

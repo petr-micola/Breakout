@@ -2,6 +2,7 @@ import pygame as pg
 
 
 class Ball:
+    # vytvoření míče za pomocí parametrů
     def __init__(self, screen, color, r, x, y):
         self.rect = None
         self.screen = screen
@@ -12,6 +13,7 @@ class Ball:
         self.vel_x = 0
         self.vel_y = 6
 
+    # detekce kolize s hráčem, bloky a okrajem obrazovky
     def check_collision(self, player, blocks, win_t, win_r, win_b, win_l):
         if player.rect.colliderect(self.rect):
             if player.speed > 0:
@@ -32,6 +34,7 @@ class Ball:
         elif win_b.colliderect(self.rect):
             return True
 
+    # znovuvykreslení objektu
     def update(self):
         self.x += self.vel_x
         self.y += self.vel_y

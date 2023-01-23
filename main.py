@@ -7,11 +7,13 @@ from modules.player import Player
 from modules.ball import Ball
 from modules.block import Block
 
+# konstanty pro barvy
 WHITE = '#edf6f9'
 BLUE = '#83c5be'
 
 
 class Game:
+    # základní nastavení hry, vytvoření objektů
     def __init__(self):
         pg.init()
 
@@ -42,6 +44,7 @@ class Game:
                 self.block_x = 80
                 self.height += 200
 
+    # rozjetí hry, pohyb, znovuvykreslování a kolize objektů, vyhodnocení konce hry
     def run(self):
         while True:
             self.screen.blit(self.image, (0, 0))
