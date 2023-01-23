@@ -12,6 +12,8 @@ class Ball:
         self.y = y / 2 - self.r / 2
         self.vel_x = 0
         self.vel_y = 6
+        self.points = 0
+        self.font = pg.font.SysFont("Montserrat", 28)
 
     # detekce kolize s hráčem, bloky a okrajem obrazovky
     def check_collision(self, player, blocks, win_t, win_r, win_b, win_l):
@@ -26,6 +28,7 @@ class Ball:
             if block.rect.colliderect(self.rect):
                 blocks.pop(blocks.index(block))
                 self.vel_y *= -1
+                self.points += 100
 
         if win_t.colliderect(self.rect):
             self.vel_y *= -1
@@ -40,3 +43,5 @@ class Ball:
         self.y += self.vel_y
         self.rect = pg.Rect((self.x, self.y), (self.r, self.r))
         pg.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+        temp = self.font.render(str(self.points), 1, (255, 255, 255))
+        self.screen.blit(temp, (570, 480))
